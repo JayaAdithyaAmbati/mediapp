@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Amplify } from 'aws-amplify';
 import awsExports from './aws-exports';
-import HomePage from './components/HomePage';
+import HomePage from './components/Homepage';
 import BookAppointment from './components/BookAppointment';
 import WelcomePage from './components/WelcomePage';
 import Login from './components/Login';
