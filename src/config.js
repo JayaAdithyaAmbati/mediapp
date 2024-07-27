@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config();
 
 const config = {
   awsAccessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
