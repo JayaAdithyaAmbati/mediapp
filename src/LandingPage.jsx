@@ -1,21 +1,28 @@
 import { useRef } from "react";
 import { Select } from "./components/Select";
-import AWS from 'aws-sdk';
-import config from './config';
+import * as AWS from 'aws-sdk';
+import config from './config'
 
 // Configure AWS SDK for DynamoDB
 AWS.config.update({
     region: 'us-east-1', 
-    accessKeyId: config.awsAccessKeyId,
-    secretAccessKey: config.awsSecretAccessKey
-});
+    // endpoint: 'dynamodb.us-east-1.amazonaws.com',
+    accessKeyId: config.awsAccessKeyId, // update your accessKeyId here!!!!This will be available after creating the IAM role
+    secretAccessKey:  config.awsSecretAccessKey// update your secretAccessKey here(DONOT FORGET TO NOTE THESE TWO)
+})
 
 const dbClient = new AWS.DynamoDB.DocumentClient();
 const ses = new AWS.SES({
     region: 'us-east-1',
-    accessKeyId: config.sesAccessKeyId,
-    secretAccessKey: config.sesSecretAccessKey,
-});
+    smtp: {
+        host: 'email-smtp.us-east-1.amazonaws.com',
+        port: 587,
+        auth: {
+            user: config.sesAccessKeyId, //This comes when u create a smtp
+            pass: config.sesSecretAccessKey
+        }
+    }
+})
 
 export const LandingPage = () => {
     const nameRef = useRef();
@@ -107,47 +114,48 @@ export const LandingPage = () => {
 
     return (
         <div className='main'>
-            <section className="container">
-                <section className="form-container">
-                    <h2>Book your Appointment</h2>
-                    <form onSubmit={submitForm}>
-                        <input
-                            type="text"
-                            placeholder="Enter your name"
-                            ref={nameRef}
-                        />
-                        <input
-                            type="tel"
-                            placeholder="Enter your phone number"
-                            ref={phoneRef}
-                        />
-                        <input
-                            type="number"
-                            placeholder="Enter your age"
-                            ref={ageRef}
-                        />
-                        <input
-                            type="email"
-                            placeholder="Enter your email"
-                            ref={emailRef}
-                        />
-                        <Select
-                            options={locations}
-                            selectRef={locationRef}
-                            placeholder="Select your location"
-                        />
-                        <Select
-                            options={services}
-                            selectRef={serviceRef}
-                            placeholder="Select the service"
-                        />
-                        <button type="submit" className="submit">Submit</button>
-                    </form>
-                </section>
-                <footer>
-                    <small>2024-2025</small>
-                </footer>
+        <section className="container">
+            <section className="form-container">
+                <h2>Book your Appointment</h2>
+                <form onSubmit={submitForm}>
+                    <input
+                        type="text"
+                        placeholder="Enter your name"
+                        ref={nameRef}
+                    />
+                    <input
+                        type="tel"
+                        placeholder="Enter your phone number"
+                        ref={phoneRef}
+                    />
+                    <input
+                        type="number"
+                        placeholder="Enter your age"
+                        ref={ageRef}
+                    />
+                    <input
+                        type="email"
+                        placeholder="Enter your email"
+                        ref={emailRef}
+                    />
+                    <Select
+                        options={locations}
+                        selectRef={locationRef}
+                        placeholder="Select your location"
+                    />
+                    <Select
+                        options={services}
+                        selectRef={serviceRef}
+                        placeholder="Select the service"
+                    />
+                    <button type="submit" className="submit">Submit</button>
+                </form>
             </section>
+            <footer>
+                <small>2024-2025</small>
+            </footer>
+        </section>
         </div>
     );
 };
+
