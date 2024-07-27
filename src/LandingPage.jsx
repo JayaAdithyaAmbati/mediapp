@@ -109,6 +109,7 @@ export const LandingPage = () => {
             console.log("Email sent successfully");
         } catch (err) {
             console.error("Error", err);
+            console.log(config)
         }
     };
 
