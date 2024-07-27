@@ -1,24 +1,53 @@
+// index.js
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Amplify } from 'aws-amplify';
+import awsExports from './aws-exports';
+import HomePage from './components/HomePage';
+import BookAppointment from './components/BookAppointment';
+import WelcomePage from './components/WelcomePage';
+import Login from './components/Login';
+import ProtectedRoute from './components/ProtectedRoute'; // Import ProtectedRoute
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-// import Kommunicate from "@kommunicate/kommunicate-chatbot-plugin";
 
-// Kommunicate.init("e7c23664603f92d51fe85a6168057dc9", {
-//   automaticChatOpenOnNavigation: true,
-//   popupWidget: true
-// });
+// Configure Amplify
+Amplify.configure(awsExports);
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <WelcomePage />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/homePage",
+    element: (
+      <ProtectedRoute>
+        <HomePage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/bookAppointment",
+    element: (
+      <ProtectedRoute>
+        <BookAppointment />
+      </ProtectedRoute>
+    ),
+  }
+]);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const App = () => {
+  return (
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
+  );
+};
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);

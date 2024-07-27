@@ -23,12 +23,12 @@
   color: white;
 } */
 
-.App-header {
+.app-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #282c34;
+  background-color: transparent;
 }
 
 
@@ -55,11 +55,14 @@ body {
 }
 
 .main {
-  background-color: #1e56a0;
+  background-image: url('/public/BookingBg.jpeg');
+  background-size: cover; /* Adjusts the size of the image to cover the entire element */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 130vh;
   margin: 0;
 }
 
@@ -127,4 +130,113 @@ input, select, textarea, .submit {
 
 .link-button:hover {
   background-color: #174a86;
+}
+.navbar {
+  background-color: #8b69ba;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-logo a {
+  color: white;
+  font-size: 1.5em;
+  text-decoration: none;
+}
+
+.navbar-links a {
+  color: white;
+  margin-left: 15px;
+  text-decoration: none;
+  font-size: 1em;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.hero-section {
+  background: url('https://cygnusgastro.com/wp-content/uploads/2021/12/appoinrment-1.jpg') no-repeat center center fixed;
+  background-size: cover;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: white;
+  text-align: center;
+  z-index: 1;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-button {
+  background-color: #8b69ba;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 20px;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.hero-button:hover {
+  background-color: #a378e0;
+}
+
+.services-section {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  position: relative;
+  margin-top: -70px;
+  z-index: 2;
+}
+
+.service-card {
+  background: rgb(255, 249, 249);
+  border-radius: 8px;
+  box-shadow: 4px 4px 8px rgba(1, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  width: 200px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.service-card h3 {
+  margin-top: 10px;
+  font-size: 1.2em;
+}
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.footer {
+  background-color: #8b67b1;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
 }
